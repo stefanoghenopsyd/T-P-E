@@ -133,10 +133,13 @@ def get_feedback(x, y):
 # --- HEADER E LOGO ---
 col_logo, col_title = st.columns([1, 4])
 with col_logo:
-    # SPAZIO LOGO GÉNERA
-    # Per inserire il logo vero, de-commenta la riga sotto e carica un file 'logo.png'
-    st.image("logo.png", width=100)
-    st.markdown("### 🧬 GÉNERA") # Placeholder testuale
+    # PROVA A CARICARE logo.png
+    try:
+        st.image("logo.png", width=100)
+    except:
+        # Se non trova il file, mette il testo come fallback
+        st.markdown("### 🧬 GÉNERA")
+        
 with col_title:
     st.title("Navigatore Esistenziale")
     st.markdown("**Test di autovalutazione sulla capacità di affrontare l'imprevisto**")
@@ -169,9 +172,6 @@ st.subheader("2. Il Test")
 st.info("Valuta le affermazioni su una scala da 1 (Per nulla d'accordo) a 4 (Pienamente d'accordo). Sii onesto, Gheno ti osserva!")
 
 # Definizione Domande
-# Struttura: (Testo, Asse, Inverso?)
-# Asse 'X': Passato (-) vs Futuro (+)
-# Asse 'Y': Penso (-) vs Faccio (+)
 items = [
     # ASSE X: PASSATO vs FUTURO
     {"text": "Di fronte a un cambiamento improvviso (es. un nuovo software), la mia prima reazione è il fastidio per ciò che perdo rispetto al 'vecchio modo'.", "axis": "X", "reverse": True},
@@ -205,11 +205,8 @@ with st.form("test_form"):
         )
         st.markdown("---")
         
-        # Logica di calcolo (accumuliamo solo se c'è un valore, il check finale è sul submit)
         if val is not None:
-            # Se reverse=True: 1->4, 2->3, 3->2, 4->1. Formula: 5 - val
             points = (5 - val) if item['reverse'] else val
-            
             if item['axis'] == "X":
                 scores_x.append(points)
             else:
@@ -219,26 +216,21 @@ with st.form("test_form"):
 
 # --- RESTITUZIONE FEEDBACK ---
 if submitted:
-    # Verifica completezza
     if len(scores_x) + len(scores_y) < 10:
         st.error("⚠️ Per favore, rispondi a tutte le domande per ottenere un profilo accurato.")
     else:
-        # Calcolo Totali (Min 5, Max 20 per asse)
-        total_x = sum(scores_x) # Tendenza Futuro
-        total_y = sum(scores_y) # Tendenza Azione
+        total_x = sum(scores_x)
+        total_y = sum(scores_y)
         
-        # Recupero Contenuti
         feedback = get_feedback(total_x, total_y)
         
         st.success("Analisi completata!")
         
-        # LAYOUT RISULTATI
         res_col1, res_col2 = st.columns([1, 1])
         
         with res_col1:
             st.markdown(f"### {feedback['title']}")
             
-            # Box Feedback Narrativo
             st.markdown(f"""
             <div class="profile-box">
                 <p>{feedback['desc']}</p>
@@ -247,7 +239,6 @@ if submitted:
             </div>
             """, unsafe_allow_html=True)
             
-            # Dettagli numerici (Accordion chiuso)
             with st.expander("Dettagli Punteggi"):
                 st.write(f"Orientamento al Futuro (Asse X): {total_x}/20")
                 st.write(f"Orientamento all'Azione (Asse Y): {total_y}/20")
