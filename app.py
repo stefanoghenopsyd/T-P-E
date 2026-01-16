@@ -1,4 +1,4 @@
-import streamlit as st
+eimport streamlit as st
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
@@ -165,18 +165,18 @@ st.subheader("1. Chi sei?")
 st.caption("Pochi dati per contestualizzare il tuo profilo.")
 col1, col2 = st.columns(2)
 with col1:
-    ruolo = st.text_input("Ruolo lavorativo attuale", placeholder="Es. HR Manager, Studente, Libero Prof...")
+    Genere = st.text_input("Genere", placeholder="Es. Uomo, Donna, Non Binario, Non risponde")
 with col2:
-    seniority = st.selectbox("Anni di esperienza", ["0-3 anni (Start)", "3-10 anni (Growth)", "Over 10 anni (Seniority)"])
+    Età = st.selectbox("Facia d'età", ["fino a 20 anni", "21-30 anni", "31-40 anni", "41-50 anni", "51-60 anni", 61-70 anni", "più di 70 anni"])
 
 # --- IL TEST (ITEMS) ---
 st.subheader("2. Il Test")
-st.info("Valuta le affermazioni su una scala da 1 (Per nulla d'accordo) a 4 (Pienamente d'accordo). Sii onesto, Gheno ti osserva!")
+st.info("Valuta le affermazioni su una scala va da da 1 (Per nulla d'accordo) a 4 (Del tutto d'accordo). Sii onesto, io ti vedo!")
 
 # Definizione Domande
 items = [
     # ASSE X: PASSATO vs FUTURO
-    {"text": "Di fronte a un cambiamento improvviso (es. un nuovo software), la mia prima reazione è il fastidio per ciò che perdo rispetto al 'vecchio modo'.", "axis": "X", "reverse": True},
+    {"text": "Di fronte a un cambiamento improvviso, la mia prima reazione è il fastidio per ciò che perdo rispetto al 'solito modo'.", "axis": "X", "reverse": True},
     {"text": "Mi capita spesso di pensare che 'una volta le cose erano più semplici e ordinate'.", "axis": "X", "reverse": True},
     {"text": "L'idea di dover imparare una competenza da zero mi stimola più di quanto mi spaventi.", "axis": "X", "reverse": False},
     {"text": "Preferisco una soluzione imperfetta ma innovativa rispetto a una procedura collaudata ma obsoleta.", "axis": "X", "reverse": False},
