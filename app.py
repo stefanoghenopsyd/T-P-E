@@ -5,7 +5,7 @@ import matplotlib.patches as patches
 # --- CONFIGURAZIONE PAGINA ---
 st.set_page_config(
     page_title="GÉNERA | Test di Autovalutazione",
-    page_icon="🧭",
+    
     layout="centered"
 )
 
@@ -107,25 +107,25 @@ def get_feedback(x, y):
 
     if is_action and is_future:
         return {
-            "title": "IL CANTIERE DELLA CATTEDRALE 🏗️",
+            "title": "IL CANTIERE DELLA CATTEDRALE",
             "desc": "Sei nel quadrante della **Generatività**. Unisci la visione del domani alla capacità di sporcarti le mani oggi. Non ti limiti a sognare o a ripetere gesti vuoti: costruisci valore. Sei colui che pianta alberi sotto la cui ombra non si siederà, ma lo fa comunque.",
             "tip": "Attento al delirio di onnipotenza. Anche le cattedrali hanno bisogno di fondamenta solide: ogni tanto controlla la staticità della struttura."
         }
     elif is_action and not is_future:
         return {
-            "title": "IL CRICETO EFFICIENTE 🐹",
+            "title": "IL CRICETO EFFICIENTE",
             "desc": "Sei una macchina da guerra. Lavori tantissimo, sudi, ti impegni. Il problema? **Corri verso il passato**. Sei bravissimo a mantenere in vita procedure e modi di fare che forse non servono più. Grande fatica, poca evoluzione.",
             "tip": "Fermati. Respira. Chiediti 'Perché lo faccio?' prima di 'Come posso farlo più velocemente?'. Alza la testa dal manubrio."
         }
     elif not is_action and is_future:
         return {
-            "title": "IL VISIONARIO DA DIVANO ☁️",
+            "title": "IL VISIONARIO DA DIVANO",
             "desc": "Hai capito tutto: vedi i trend, intuisci il futuro, hai idee brillanti. Peccato che **restino tutte nella tua testa**. Soffri di 'pensabilità' senza 'possibilitazione'. Il mondo cambia mentre tu perfezioni il piano strategico.",
             "tip": "Come dico nel mio libro: **Fallo!** Prendi l'idea più imperfetta che hai e realizzala entro stasera. Smetti di pianificare, inizia a sbagliare."
         }
     else:
         return {
-            "title": "IL MUSEO DELLE CERE 🕯️",
+            "title": "IL MUSEO DELLE CERE",
             "desc": "Sei in una zona di stallo. Il pensiero è rivolto a 'come si stava meglio una volta' e l'azione è paralizzata. È il regno della nostalgia sterile e della resistenza al cambiamento. Qui non cresce nulla.",
             "tip": "Devi rompere l'inerzia. Trova una cosa piccolissima da cambiare domani mattina. Una sola. Non importa se sbagli, l'importante è muovere l'aria."
         }
@@ -133,9 +133,9 @@ def get_feedback(x, y):
 # --- HEADER E LOGO ---
 col_logo, col_title = st.columns([1, 4])
 with col_logo:
-    # PROVA A CARICARE logo.png
+    # PROVA A CARICARE Logo.png
     try:
-        st.image("logo.png", width=100)
+        st.image("Logo.png", width=100)
     except:
         # Se non trova il file, mette il testo come fallback
         st.markdown("### 🧬 GÉNERA")
@@ -147,7 +147,7 @@ with col_title:
 st.markdown("---")
 
 # --- INTRODUZIONE TEORICA ---
-with st.expander("📖 Introduzione: Perché siamo qui?", expanded=True):
+with st.expander("Introduzione: Perché siamo qui?", expanded=True):
     st.markdown("""
     Benvenuto. Se sei qui, probabilmente senti che il terreno sotto i piedi – quello che chiamavamo "certezza" o "posto fisso" – sta tremando.
     
