@@ -5,7 +5,7 @@ import matplotlib.patches as patches
 # --- CONFIGURAZIONE PAGINA ---
 st.set_page_config(
     page_title="GÉNERA | Test di Autovalutazione",
-    page_icon="🧭",
+
     layout="centered"
 )
 
