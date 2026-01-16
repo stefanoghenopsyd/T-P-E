@@ -5,7 +5,7 @@ import matplotlib.patches as patches
 # --- CONFIGURAZIONE PAGINA ---
 st.set_page_config(
     page_title="GÉNERA | Test di Autovalutazione",
-
+    page_icon="🧭",
     layout="centered"
 )
 
@@ -107,8 +107,157 @@ def get_feedback(x, y):
 
     if is_action and is_future:
         return {
-            "title": "IL CANTIERE DELLA CATTEDRALE 🏗️",
+            "title": "IL CANTIERE DELLA CATTEDRALE",
             "desc": "Sei nel quadrante della **Generatività**. Unisci la visione del domani alla capacità di sporcarti le mani oggi. Non ti limiti a sognare o a ripetere gesti vuoti: costruisci valore. Sei colui che pianta alberi sotto la cui ombra non si siederà, ma lo fa comunque.",
             "tip": "Attento al delirio di onnipotenza. Anche le cattedrali hanno bisogno di fondamenta solide: ogni tanto controlla la staticità della struttura."
         }
     elif is_action and not is_future:
+        return {
+            "title": "IL CRICETO EFFICIENTE",
+            "desc": "Sei una macchina da guerra. Lavori tantissimo, sudi, ti impegni. Il problema? **Corri verso il passato**. Sei bravissimo a mantenere in vita procedure e modi di fare che forse non servono più. Grande fatica, poca evoluzione.",
+            "tip": "Fermati. Respira. Chiediti 'Perché lo faccio?' prima di 'Come posso farlo più velocemente?'. Alza la testa dal manubrio."
+        }
+    elif not is_action and is_future:
+        return {
+            "title": "IL VISIONARIO DA DIVANO",
+            "desc": "Hai capito tutto: vedi i trend, intuisci il futuro, hai idee brillanti. Peccato che **restino tutte nella tua testa**. Soffri di 'pensabilità' senza 'possibilitazione'. Il mondo cambia mentre tu perfezioni il piano strategico.",
+            "tip": "Come dico nel mio libro: **Fallo!** Prendi l'idea più imperfetta che hai e realizzala entro stasera. Smetti di pianificare, inizia a sbagliare."
+        }
+    else:
+        return {
+            "title": "IL MUSEO DELLE CERE",
+            "desc": "Sei in una zona di stallo. Il pensiero è rivolto a 'come si stava meglio una volta' e l'azione è paralizzata. È il regno della nostalgia sterile e della resistenza al cambiamento. Qui non cresce nulla.",
+            "tip": "Devi rompere l'inerzia. Trova una cosa piccolissima da cambiare domani mattina. Una sola. Non importa se sbagli, l'importante è muovere l'aria."
+        }
+
+# --- HEADER E LOGO ---
+# Abbiamo allargato la prima colonna (da 1 a 1.5) per dare spazio al logo
+col_logo, col_title = st.columns([1.5, 3.5])
+
+with col_logo:
+    try:
+        # use_container_width=True adatta l'immagine alla larghezza della colonna
+        st.image("Logo.png", use_container_width=True)
+    except:
+        # Fallback testuale
+        st.markdown("### 🧬 GÉNERA")
+        
+with col_title:
+    st.title("Navigatore Esistenziale")
+    st.markdown("**Test di autovalutazione sulla capacità di affrontare il domani**")
+
+st.markdown("---")
+
+# --- INTRODUZIONE TEORICA ---
+with st.expander("Introduzione", expanded=True):
+    st.markdown("""
+    Benvenuto. Se sei qui, probabilmente senti che il terreno sotto i piedi – quello che chiamavamo "certezze" o in alcuni casi "posto fisso" – sta tremando.
+    
+    Come racconto spesso nei miei lavori sulla *psicologia delle risorse umane*, l'essere umano di fronte alla novità (o all'imprevisto) si muove su due grandi assi:
+    1.  **Il Tempo (Asse X):** Guardiamo nello specchietto retrovisore ciò che sta alle nostre spalle (**Passato**) cercando sicurezza, o piuttosto guardiamo avanti a noi nel parabrezza (**Futuro**) accettando il rischio?
+    2.  **L'Energia (Asse Y):** Restiamo nel mondo delle idee (**Penso**) oppure ci attiviamo per trasformare la realtà (**Faccio**)?
+    
+    Questo strumento vuole provare a descrivere il nostro orientamento. Non è una sentenza, è piuttosto una bussola. Serve a capire dove ultimamente hai piantato la tenda  e, se necessario, a smontarla per spostarti altrove.
+    """)
+
+# --- DATI SOCIO ANAGRAFICI ---
+st.subheader("1. Chi sei?")
+st.caption("Pochi dati per contestualizzare il tuo profilo.")
+col1, col2 = st.columns(2)
+with col1:
+    ruolo = st.text_input("Ruolo lavorativo attuale", placeholder="Es. HR Manager, Studente, Libero Prof...")
+with col2:
+    seniority = st.selectbox("Anni di esperienza", ["0-3 anni (Start)", "3-10 anni (Growth)", "Over 10 anni (Seniority)"])
+
+# --- IL TEST (ITEMS) ---
+st.subheader("2. Il Test")
+st.info("Valuta le affermazioni su una scala da 1 (Per nulla d'accordo) a 4 (Pienamente d'accordo). Sii onesto, Gheno ti osserva!")
+
+# Definizione Domande
+items = [
+    # ASSE X: PASSATO vs FUTURO
+    {"text": "Di fronte a un cambiamento improvviso (es. un nuovo software), la mia prima reazione è il fastidio per ciò che perdo rispetto al 'vecchio modo'.", "axis": "X", "reverse": True},
+    {"text": "Mi capita spesso di pensare che 'una volta le cose erano più semplici e ordinate'.", "axis": "X", "reverse": True},
+    {"text": "L'idea di dover imparare una competenza da zero mi stimola più di quanto mi spaventi.", "axis": "X", "reverse": False},
+    {"text": "Preferisco una soluzione imperfetta ma innovativa rispetto a una procedura collaudata ma obsoleta.", "axis": "X", "reverse": False},
+    {"text": "Vedo l'imprevisto come un guastafeste che rovina i miei piani, piuttosto che come un'opportunità.", "axis": "X", "reverse": True},
+
+    # ASSE Y: PENSO vs FACCIO
+    {"text": "Ho 'nel cassetto' molte idee e progetti che non ho mai provato a realizzare concretamente.", "axis": "Y", "reverse": True},
+    {"text": "Di fronte a un problema, mi attivo subito per fare qualcosa, anche se non ho ancora tutte le informazioni.", "axis": "Y", "reverse": False},
+    {"text": "Prima di agire ho bisogno di analizzare tutte le possibili conseguenze negative, e questo spesso mi rallenta.", "axis": "Y", "reverse": True},
+    {"text": "Credo nella filosofia del 'Fatto è meglio che perfetto'.", "axis": "Y", "reverse": False},
+    {"text": "Spesso mi ritrovo a rimuginare su decisioni prese, pensando a cosa avrei potuto fare diversamente.", "axis": "Y", "reverse": True},
+]
+
+# Form per la raccolta dati
+scores_x = []
+scores_y = []
+
+with st.form("test_form"):
+    for i, item in enumerate(items):
+        st.markdown(f"**{i+1}. {item['text']}**")
+        val = st.radio(
+            f"Risposta item {i+1}", 
+            options=[1, 2, 3, 4], 
+            index=None, 
+            horizontal=True, 
+            label_visibility="collapsed",
+            key=f"q{i}"
+        )
+        st.markdown("---")
+        
+        if val is not None:
+            points = (5 - val) if item['reverse'] else val
+            if item['axis'] == "X":
+                scores_x.append(points)
+            else:
+                scores_y.append(points)
+
+    submitted = st.form_submit_button("CALCOLA IL MIO PROFILO")
+
+# --- RESTITUZIONE FEEDBACK ---
+if submitted:
+    if len(scores_x) + len(scores_y) < 10:
+        st.error("⚠️ Per favore, rispondi a tutte le domande per ottenere un profilo accurato.")
+    else:
+        total_x = sum(scores_x)
+        total_y = sum(scores_y)
+        
+        feedback = get_feedback(total_x, total_y)
+        
+        st.success("Analisi completata!")
+        
+        res_col1, res_col2 = st.columns([1, 1])
+        
+        with res_col1:
+            st.markdown(f"### {feedback['title']}")
+            
+            st.markdown(f"""
+            <div class="profile-box">
+                <p>{feedback['desc']}</p>
+                <hr style="border-top: 1px solid #bdc3c7;">
+                <p class="quote">💡 <strong>Il consiglio di Gheno:</strong><br>{feedback['tip']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            with st.expander("Dettagli Punteggi"):
+                st.write(f"Orientamento al Futuro (Asse X): {total_x}/20")
+                st.write(f"Orientamento all'Azione (Asse Y): {total_y}/20")
+
+        with res_col2:
+            st.caption("La tua posizione nella Matrice:")
+            fig = draw_chart(total_x, total_y)
+            st.pyplot(fig)
+
+# --- FOOTER ---
+st.markdown("<br><br><br>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div style='text-align: center; color: #95a5a6; font-size: 0.8em;'>
+    Developed for <strong>GÉNERA</strong> | Based on the works of Stefano Gheno<br>
+    <em>"Non c'è nulla di più pratico di una buona teoria... se poi la applichi."</em>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
