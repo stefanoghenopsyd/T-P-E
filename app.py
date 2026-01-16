@@ -167,7 +167,7 @@ col1, col2 = st.columns(2)
 with col1:
     Genere = st.text_input("Genere", placeholder="Es. Uomo, Donna, Non Binario, Non risponde")
 with col2:
-    Età = st.selectbox("Facia d'età", ["fino a 20 anni", "21-30 anni", "31-40 anni", "41-50 anni", "51-60 anni", 61-70 anni", "più di 70 anni"])
+    Età = st.text_input("Fascia d'età", placeholder="Es.fino a 20 anni, 21-30 anni, 31-40 anni, 41-50 anni, 51-60 anni, 61-70 anni, più di 70 anni")
 
 # --- IL TEST (ITEMS) ---
 st.subheader("2. Il Test")
